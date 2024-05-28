@@ -187,7 +187,6 @@
               >
                 <option value="" disabled selected>-- Pilih Level User --</option>
                 <option value="Admin">Admin</option>
-                <option value="Petugas">Petugas</option>
                 <option value="Penumpang">Penumpang</option>
               </select>
             </div>

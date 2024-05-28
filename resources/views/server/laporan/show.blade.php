@@ -5,6 +5,10 @@
 @endif
 @section('styles')
   <style>
+    h4{
+       color: #000
+
+    }
     .card-body {
       padding: .5rem 1rem;
       color: #000;
@@ -54,7 +58,6 @@
             <div class="col-auto">
               <span class="title">
                 <div class="title-icon rotate-n-15">
-                  <i class="fas fa-ticket-alt"></i>
                 </div>
                 <div class="title-text ml-1">Ticket</div>
               </span>
@@ -123,8 +126,14 @@
           <div class="card-body">
             <a href="{{ route('pembayaran', $data->id) }}" class="btn btn-primary btn-block btn-sm text-white">Verifikasi</a>
           </div>
+        @elseif ($data->status == "Belum Bayar" && Auth::user()->level = "penumpang")
+        <div class="card-body">
+            <h4>Harap Segera Melakukan Pembayaran</h4>
+            <a href="https://wa.link/cxgpgy">Kirim Bukti Pembayaran</a>
+          </div>
         @endif
       </div>
     </div>
   </div>
 @endsection
+

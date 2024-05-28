@@ -43,12 +43,14 @@
                     @csrf
                     @method('delete')
                     <a
-                      href="javascript:void()"
-                      class="btn btn-warning btn-sm btn-circle btn-edit"
-                      data-id="{{ $data->id }}"
-                      data-name="{{ $data->name }}"
-                      ><i class="fas fa-edit"></i
-                    ></a>
+                    href="javascript:void(0);"
+                    class="btn btn-warning btn-sm btn-circle btn-edit"
+                    data-id="{{ $data->id }}"
+                    data-name="{{ $data->name }}"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </a>
+
                     <button
                       type="submit"
                       class="btn btn-danger btn-sm btn-circle"
@@ -66,31 +68,20 @@
     </div>
   </div>
   <!-- Add Modal -->
-  <div
-  class="modal fade"
-  id="modal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  >
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Tambah Category</h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{ route('category.store') }}" method="POST">
+        <form id="categoryForm" action="{{ route('category.store') }}" method="POST">
           @csrf
+          @method('PUT')
+          <input type="hidden" name="id" id="id">
           <div class="modal-body">
-            <input type="hidden" name="id">
             <div class="form-group">
               <label for="name">Name</label>
               <input
@@ -104,10 +95,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              Kembali
-            </button>
-            <button type="submit" class="btn btn-primary">Tambah</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
           </div>
         </form>
       </div>
@@ -118,24 +107,33 @@
   <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
   <script>
-    $(document).ready(function() {
-      $('#dataTable').DataTable();
-    });
+   $(document).ready(function() {
+    $('#dataTable').DataTable();
 
     $(".btn-add").click(function(){
-      $("#modal").modal("show");
-      $(".modal-title").html("Tambah Category");
-      $("#id").val("");
-      $("#name").val("");
+        $("#modal").modal("show");
+        $(".modal-title").html("Tambah Category");
+        $("#categoryForm").attr("action", "{{ route('category.store') }}");
+        $("#categoryForm").attr("method", "POST");
+        $("#id").val("");
+        $("#name").val("");
+        $("input[name=_method]").remove(); // Remove the PUT method input if it exists
     });
 
     $("#dataTable").on("click", ".btn-edit", function () {
-      let id = $(this).data("id");
-      let name = $(this).data("name");
-      $("#modal").modal("show");
-      $(".modal-title").html("Edit Category");
-      $("#id").val(id);
-      $("#name").val(name);
+        let id = $(this).data("id");
+        let name = $(this).data("name");
+        $("#modal").modal("show");
+        $(".modal-title").html("Edit Category");
+        $("#categoryForm").attr("action", "{{ url('category') }}/" + id);
+        $("#categoryForm").attr("method", "POST");
+        if($("input[name=_method]").length == 0) {
+            $('#categoryForm').append('<input type="hidden" name="_method" value="PUT">');
+        }
+        $("#id").val(id);
+        $("#name").val(name);
     });
+});
+
   </script>
 @endsection

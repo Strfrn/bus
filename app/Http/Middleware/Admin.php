@@ -16,8 +16,8 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->level == "Petugas") {
-            return redirect('/petugas');
+        if ($request->user()->level == "admin") {
+            return redirect('/');
         } else {
             return $next($request);
         }

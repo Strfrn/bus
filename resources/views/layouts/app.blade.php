@@ -7,8 +7,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Ticket - @yield('title')</title>
-  <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
+  <title>GoBis - @yield('title')</title>
+  <link rel="shortcut icon" href="{{ asset('img/favicon_io/android-chrome-512x512.png') }}">
 
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -82,14 +82,11 @@
             <div class="container my-auto">
               <div class="copyright text-center my-auto">
                 <span>
-                  Copyright &copy; 2020
-                  @if (date('Y') != '2020')
-                    - {{ date('Y') }}
-                  @endif
-                  &nbsp; All rights reserved • by
-                  <a href="https://github.com/adhiariyadi/" target="_blank"
-                    >Adhi Ariyadi</a
-                  >.
+                    Copyright &copy; 2024
+                    &nbsp;  contact us
+                    <a href="https://wa.link/vbjg7c" target="_blank"
+                      >GoBis</a
+                    >.
                 </span>
               </div>
             </div>
@@ -105,9 +102,9 @@
           <div class="container">
             <a class="title" href="{{ url('/') }}">
               <div class="title-icon rotate-n-15">
-                <i class="fas fa-ticket-alt"></i>
+                <i><img src="" alt=""></i>
               </div>
-              <div class="title-text mx-3">Ticket</div>
+              <div class="title-text mx-3">GoBis</div>
             </a>
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -156,13 +153,10 @@
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>
-              Copyright &copy; 2020
-              @if (date('Y') != '2020')
-                - {{ date('Y') }}
-              @endif
-              &nbsp; All rights reserved • by
-              <a href="https://github.com/adhiariyadi/" target="_blank"
-                >Adhi Ariyadi</a
+              Copyright &copy; 2024
+              &nbsp;  contact us
+              <a href="https://wa.link/vbjg7c" target="_blank"
+                >GoBis</a
               >.
             </span>
           </div>

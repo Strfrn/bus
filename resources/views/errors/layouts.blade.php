@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Ticket - @yield('title')</title>
+  <title>GoBis - @yield('Title')</title>
 
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
     .full-height {
       height: 100vh;
     }
-  
+
     .flex-center {
       align-items: center;
       display: flex;

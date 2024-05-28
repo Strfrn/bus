@@ -17,7 +17,6 @@ class Pemesanan extends Model
         'status',
         'rute_id',
         'penumpang_id',
-        'petugas_id'
     ];
 
     public function rute()
@@ -30,10 +29,6 @@ class Pemesanan extends Model
         return $this->belongsTo('App\Models\User', 'penumpang_id');
     }
 
-    public function petugas()
-    {
-        return $this->belongsTo('App\Models\User', 'petugas_id');
-    }
 
     protected $table = 'pemesanan';
 }

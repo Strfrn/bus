@@ -77,7 +77,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        // 
+        //
     }
 
     /**
@@ -89,8 +89,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $category = Category::findOrFail($id);
+
+        $category->name = $request->name;
+        $category->slug = strtolower(Str::slug($request->name));
+        $category->save();
+
+        return redirect()->route('category.index')->with('success', 'Berhasil Update!');
+ }
 
     /**
      * Remove the specified resource from storage.

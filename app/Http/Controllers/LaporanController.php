@@ -17,7 +17,7 @@ class LaporanController extends Controller
 
     public function petugas()
     {
-        return view('client.petugas');
+        return view('client.verfikasi');
     }
 
     public function kode(Request $request)
@@ -39,7 +39,7 @@ class LaporanController extends Controller
     {
         Pemesanan::find($id)->update([
             'status' => 'Sudah Bayar',
-            'petugas_id' => Auth::user()->id
+            'admin_id' => Auth::user()->id
         ]);
 
         return redirect()->back()->with('success', 'Pembayaran Ticket Success!');
@@ -50,4 +50,6 @@ class LaporanController extends Controller
         $pemesanan = Pemesanan::with('rute.transportasi')->where('penumpang_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         return view('client.history', compact('pemesanan'));
     }
+
+
 }

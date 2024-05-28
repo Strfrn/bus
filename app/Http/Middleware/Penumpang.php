@@ -18,8 +18,6 @@ class Penumpang
     {
         if ($request->user()->level == "Admin") {
             return redirect('/home');
-        } else if ($request->user()->level == "Petugas") {
-            return redirect('/petugas');
         } else {
             return $next($request);
         }

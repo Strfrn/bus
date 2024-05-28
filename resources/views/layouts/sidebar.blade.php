@@ -2,9 +2,9 @@
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
     <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-ticket-alt"></i>
+      <i><img src="" alt=""></i>
     </div>
-    <div class="sidebar-brand-text mx-3">Ticket</div>
+    <div class="sidebar-brand-text mx-3">GoBis</div>
   </a>
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
@@ -31,7 +31,7 @@
   </li>
   <!-- Nav Item - Verifikasi -->
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('petugas') }}">
+    <a class="nav-link" href="{{ route('verifikasi') }}">
       <i class="fas fa-clipboard-check"></i>
       <span>Verifikasi</span></a>
   </li>

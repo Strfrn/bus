@@ -16,18 +16,16 @@ class CreatePemesananTable extends Migration
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->id();
             $table->string('kode');
-            $table->string('kursi')->nullable();
+            $table->string('kursi');
             $table->timestamp('waktu');
             $table->integer('total');
             $table->enum('status', ['Belum Bayar', 'Sudah Bayar'])->default('Belum Bayar');
+            $table->string('bukti_bayar')->nullable();
             $table->unsignedBigInteger('rute_id');
             $table->unsignedBigInteger('penumpang_id');
-            $table->unsignedBigInteger('petugas_id')->nullable();
             $table->timestamps();
-
             $table->foreign('rute_id')->references('id')->on('rute');
             $table->foreign('penumpang_id')->references('id')->on('users');
-            $table->foreign('petugas_id')->references('id')->on('users');
         });
     }
 

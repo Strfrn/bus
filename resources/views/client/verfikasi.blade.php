@@ -2,15 +2,13 @@
 @if (Auth::user()->level == "Admin")
   @section('title', 'Verifikasi Pembayaran')
   @section('heading', 'Verifikasi Pembayaran')
-@elseif (Auth::user()->level == "Petugas")
-  @section('title', 'Petugas')
 @endif
 @section('content')
   <div class="row justify-content-center">
     <div class="col-12">
       <div class="card shadow">
         <div class="card-body">
-          <form method="POST" action="{{ route('petugas.kode') }}">
+          <form method="POST" action="{{ route('verifikasi.kode') }}">
           @csrf
             <div class="row">
               <div class="col">

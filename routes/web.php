@@ -22,10 +22,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/edit/password', [App\Http\Controllers\UserController::class, 'password'])->name('edit.password');
     Route::get('/transaksi/{kode}', [App\Http\Controllers\LaporanController::class, 'show'])->name('transaksi.show');
 
-    Route::middleware(['petugas'])->group(function () {
+    Route::middleware(['admin'])->group(function () {
         Route::get('/pembayaran/{id}', [App\Http\Controllers\LaporanController::class, 'pembayaran'])->name('pembayaran');
-        Route::get('/petugas', [App\Http\Controllers\LaporanController::class, 'petugas'])->name('petugas');
-        Route::post('/petugas', [App\Http\Controllers\LaporanController::class, 'kode'])->name('petugas.kode');
+        Route::get('/verifikasi', [App\Http\Controllers\LaporanController::class, 'petugas'])->name('verifikasi');
+        Route::post('/verifikasi', [App\Http\Controllers\LaporanController::class, 'kode'])->name('verifikasi.kode');
 
         Route::middleware(['admin'])->group(function () {
             Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -43,5 +43,6 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/', App\Http\Controllers\PemesananController::class);
         Route::get('/history', [App\Http\Controllers\LaporanController::class, 'history'])->name('history');
         Route::get('/{id}/{data}', [App\Http\Controllers\PemesananController::class, 'show'])->name('show');
+
     });
 });
