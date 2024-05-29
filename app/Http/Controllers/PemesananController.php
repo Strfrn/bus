@@ -93,6 +93,7 @@ class PemesananController extends Controller
                 'penumpang_id' => Auth::user()->id
             ]);
 
+            $this->updateSeatStatus($rute->id, $kodePemesanan, $waktu);
             return redirect()->back()->with('success', 'Pemesanan Tiket ' . $rute->transportasi->category->name . ' Success!');
         }
     }
@@ -174,24 +175,31 @@ class PemesananController extends Controller
     }
 
     public function pesan($kursi, $data)
-    {
-        $d = Crypt::decrypt($data);
-        $huruf = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        $kodePemesanan = strtoupper(substr(str_shuffle($huruf), 0, 7));
+{
+    $d = Crypt::decrypt($data);
+    $huruf = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    $kodePemesanan = strtoupper(substr(str_shuffle($huruf), 0, 7));
 
-        $rute = Rute::with('transportasi.category')->find($d['id']);
+    $rute = Rute::with('transportasi.category')->find($d['id']);
+    $waktu = $d['waktu'] . " " . $rute->jam;
 
-        $waktu = $d['waktu'] . " " . $rute->jam;
+    Pemesanan::create([
+        'kode' => $kodePemesanan,
+        'kursi' => $kursi,
+        'waktu' => $waktu,
+        'total' => $rute->harga,
+        'rute_id' => $rute->id,
+        'penumpang_id' => Auth::user()->id
+    ]);
 
-        Pemesanan::Create([
-            'kode' => $kodePemesanan,
-            'kursi' => $kursi,
-            'waktu' => $waktu,
-            'total' => $rute->harga,
-            'rute_id' => $rute->id,
-            'penumpang_id' => Auth::user()->id
-        ]);
+    // Update seat status
+    $this->updateSeatStatus($rute->id, $kursi, $waktu);
 
-        return redirect('/')->with('success', 'Pemesanan Tiket ' . $rute->transportasi->category->name . ' Success!');
-    }
+    return redirect('/')->with('success', 'Pemesanan Tiket ' . $rute->transportasi->category->name . ' Success!');
+}
+
+protected function updateSeatStatus($ruteId, $seatNumber, $time)
+{
+    // Logic to update the seat status in the database
+}
 }

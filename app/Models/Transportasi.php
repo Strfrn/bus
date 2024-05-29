@@ -32,5 +32,13 @@ class Transportasi extends Model
         }
     }
 
+    public function isSeatBooked($ruteId, $seatNumber, $time)
+    {
+        return Pemesanan::where('rute_id', $ruteId)
+            ->where('kursi', $seatNumber)
+            ->where('waktu', $time)
+            ->exists();
+    }
+
     protected $table = 'transportasi';
 }

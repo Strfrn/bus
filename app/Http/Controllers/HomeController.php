@@ -6,6 +6,7 @@ use App\Models\Pemesanan;
 use App\Models\Rute;
 use App\Models\Transportasi;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -30,7 +31,8 @@ class HomeController extends Controller
         $rute = Rute::count();
         $pendapatan = Pemesanan::where('status', 'Sudah Bayar')->sum('total');
         $transportasi = Transportasi::count();
+        $category = Category::count();
         $user = User::count();
-        return view('server.home', compact('rute', 'pendapatan', 'transportasi', 'user'));
+        return view('server.home', compact('rute', 'pendapatan', 'transportasi','category','user'));
     }
 }
