@@ -84,7 +84,7 @@
                 <span>
                     Copyright &copy; 2024
                     &nbsp;  contact us
-                    <a href="https://wa.link/vbjg7c" target="_blank"
+                    <a href="https://wa.me/62859106920008X?text=Hai%20ingin%20memberi%20bukti%20pembayaran%20" target="_blank"
                       >GoBis</a
                     >.
                 </span>

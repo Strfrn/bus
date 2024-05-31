@@ -202,4 +202,14 @@ protected function updateSeatStatus($ruteId, $seatNumber, $time)
 {
     // Logic to update the seat status in the database
 }
+
+public function cancel($id){
+{
+    $pemesanan = Pemesanan::findOrFail($id);
+    $pemesanan->status = 'Dibatalkan';
+    $pemesanan->save();
+
+    return redirect()->back()->with('success', 'Pemesanan berhasil dibatalkan.');
+}
+}
 }

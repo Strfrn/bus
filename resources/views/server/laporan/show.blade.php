@@ -5,16 +5,25 @@
 @endif
 @section('styles')
   <style>
-    h4{
-       color: #000
-
+    h4 {
+      color: #000;
+    }
+    .Batal {
+      color: white;
+      background-color: red;
+      padding: 10px 20px;
+      text-align: center;
+      display: block;
+      width: 200px;
+      margin: 10px auto;
+      border-radius: 5px;
+      text-decoration: none;
     }
     .card-body {
       padding: .5rem 1rem;
       color: #000;
       border-bottom: 1px solid #e3e6f0;
     }
-
     .title {
       color: #4e73df;
       text-decoration: none;
@@ -27,16 +36,13 @@
       justify-content: center;
       display: flex;
     }
-
     .title .title-text {
       display: inline;
     }
-
     .table {
       margin-bottom: 0;
       color: #000;
     }
-
     .table td {
       padding: 0;
       border-top: none;
@@ -127,13 +133,16 @@
             <a href="{{ route('pembayaran', $data->id) }}" class="btn btn-primary btn-block btn-sm text-white">Verifikasi</a>
           </div>
         @elseif ($data->status == "Belum Bayar" && Auth::user()->level = "penumpang")
-        <div class="card-body">
+          <div class="card-body">
             <h4>Harap Segera Melakukan Pembayaran</h4>
             <a href="https://wa.link/cxgpgy">Kirim Bukti Pembayaran</a>
           </div>
+          <form action="{{ route('batalkan.pemesanan', $data->id) }}" method="POST">
+            @csrf
+            <button type="submit" class="Batal">Batalkan Pemesanan</button>
+          </form>
         @endif
       </div>
     </div>
   </div>
 @endsection
-

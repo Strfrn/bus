@@ -26,7 +26,7 @@
                 @endphp
                 @if (!$isBooked)
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-                        <a href="{{ route('pesan', ['kursi' => $seatNumber, 'data' => Crypt::encrypt($data)]) }}">
+                        <a href="#" data-toggle="modal" data-target="#confirmModal" data-seat="{{ $seatNumber }}">
                             <div class="kursi bg-white">
                                 <div class="font-weight-bold text-primary m-auto" style="font-size: 26px;">{{ $seatNumber }}</div>
                             </div>
@@ -43,9 +43,48 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Konfirmasi -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Konfirmasi Pemesanan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin memesan kursi <span id="selectedSeat"></span>?
+            </div>
+            <div class="modal-footer">
+                <form action="" method="GET" id="confirmForm">
+                    @csrf
+                    <input type="hidden" name="kursi" id="kursi" value="">
+                    <input type="hidden" name="data" id="data" value="{{ Crypt::encrypt($data) }}">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Pesan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
 @section('script')
 <script>
+    $('#confirmModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var seat = button.data('seat');
+        var modal = $(this);
+        modal.find('#selectedSeat').text(seat);
+        modal.find('#kursi').val(seat);
+
+        var data = @json(Crypt::encrypt($data));
+        var formAction = "{{ url('pesan') }}/" + seat + "/" + data;
+        modal.find('#confirmForm').attr('action', formAction);
+    });
+
     function formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
     }

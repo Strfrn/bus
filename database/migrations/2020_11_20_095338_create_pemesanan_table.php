@@ -19,7 +19,7 @@ class CreatePemesananTable extends Migration
             $table->string('kursi');
             $table->timestamp('waktu');
             $table->integer('total');
-            $table->enum('status', ['Belum Bayar', 'Sudah Bayar'])->default('Belum Bayar');
+            $table->enum('status', ['Belum Bayar', 'Sudah Bayar','Dibatalkan'])->default('Belum Bayar');
             $table->string('bukti_bayar')->nullable();
             $table->unsignedBigInteger('rute_id');
             $table->unsignedBigInteger('penumpang_id');
